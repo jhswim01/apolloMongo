@@ -1,18 +1,26 @@
 import express from "express";
 import { ApolloServer, gql } from "apollo-server-express";
 import mongoose from "mongoose";
+import { Cat } from "./models/Cat";
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
-  type Query {
+  type Mutation {
     hello: String
+  }
+  type Query {
+    user: String
   }
 `;
 
 // Provide resolver functions for your schema fields
 const resolvers = {
-  Query: {
-    hello: () => "Hello world!"
+  Mutation: {
+    hello: async () => {
+      const kitty = new Cat({ name: "heetty" });
+      await kitty.save();
+      return "Hello world!";
+    }
   }
 };
 
@@ -22,7 +30,7 @@ const app = express();
 server.applyMiddleware({ app });
 
 mongoose
-  .connect("mongodb://localhost:27017/myapp", {
+  .connect("mongodb://localhost:27017/admin", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -38,3 +46,9 @@ mongoose
     console.log(e);
     console.log("fuck I failed");
   });
+
+const kittySchema = new mongoose.Schema({
+  name: String
+});
+
+const Kitten = mongoose.model("Kitten", kittySchema);
