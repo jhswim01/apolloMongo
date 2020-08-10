@@ -7,6 +7,7 @@
 
 ### Server Setting
 
+- [ ] typescript setting
 - [ ] script setting
 - [ ] dotenv
 
