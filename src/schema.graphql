@@ -1,0 +1,21 @@
+type Query {
+  sayBye: String!
+  sayHello(name: String!): sayHelloResponse!
+  kitty: String
+}
+
+type sayHelloResponse {
+  text: String!
+  error: Boolean!
+}
+
+type kittyResponse {
+  ok: Boolean!
+  kitty: String
+  text: String
+  error: String
+}
+
+type Mutation {
+  kitty(name: String!): kittyResponse
+}

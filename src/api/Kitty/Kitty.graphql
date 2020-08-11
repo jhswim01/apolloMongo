@@ -1,0 +1,14 @@
+type kittyResponse {
+  ok: Boolean!
+  kitty: String
+  text: String
+  error: String
+}
+
+type Mutation {
+  kitty(name: String!): kittyResponse
+}
+
+type Query {
+  kitty: String
+}
