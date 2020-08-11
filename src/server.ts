@@ -1,31 +1,46 @@
 import "./dotenv";
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
 import { createApp } from "./app";
 import express from "express";
+import schema from "./schema";
+import mongoose from "mongoose";
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
+// const typeDefs = gql`
+//   type Query {
+//     hello: String
+//   }
+// `;
 
-const resolvers = {
-  Query: {
-    hello: () => "Hello world!!!"
-  }
-};
+// const resolvers = {
+//   Query: {
+//     hello: () => "Hello world!!!"
+//   }
+// };
 
-const PORT: number | string = process.env.PORT || 4006;
+const PORT: number | string = process.env.PORT || 4000;
 
 const app: express.Application = createApp();
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   playground: true,
   introspection: true
 });
 server.applyMiddleware({ app });
 
-app.listen({ port: PORT }, () =>
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-);
+mongoose
+  .connect("mongodb://localhost:27017/admin", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("✔ Successfully connected to mongoDB");
+    app.listen({ port: PORT }, () =>
+      console.log(
+        `✔ Server ready at http://localhost:${PORT}${server.graphqlPath}`
+      )
+    );
+  })
+  .catch((e) => {
+    console.log(e);
+    console.log("fuck I failed");
+  });

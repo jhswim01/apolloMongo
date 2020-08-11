@@ -7,7 +7,7 @@ import express from "express";
 export const createApp = (): express.Application => {
   const app: express.Application = express();
 
-  // app.use("*", logger("dev"), helmet(), cors());
+  // app.use(logger("dev"));
   // app.use(helmet());
   // app.use(cors());
 
