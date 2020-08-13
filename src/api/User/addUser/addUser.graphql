@@ -1,0 +1,9 @@
+type addUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Mutation {
+  addUser(firstName: String!, lastName: String!): addUserResponse
+}

@@ -1,0 +1,6 @@
+type Coords {
+  startX: Float
+  startY: Float
+  endX: Float
+  endY: Float
+}

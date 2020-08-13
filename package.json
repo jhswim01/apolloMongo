@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "predev": "yarn run types",
+    "predev": "yarn types",
     "dev": "cd src && nodemon --exec ts-node server.ts -e ts,graphql",
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
-    "types": "rm ./src/types/graph.d.ts && graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
+    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
   },
   "repository": {
     "type": "git",

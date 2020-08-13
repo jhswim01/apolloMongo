@@ -1,12 +1,122 @@
+type Activity {
+  id: Int!
+  code: String!
+  typeOfWork: String!
+  name: String!
+  plannedCost: Float
+  actualCost: Float
+  progressRate: Float
+  plannedStartDate: String!
+  plannedEndDate: String!
+  actualStartDate: String!
+  actualEndDate: String!
+  plannedDuration: Int
+  actualDuration: Int
+  Completed: Boolean
+  Approved: Boolean
+  detail: String
+  item: [Item]
+  preActivity: [Activity]
+  postActivity: [Activity]
+  zone: Zone
+  issue: [Issue]
+  dailyLog: DailyLog
+  company: Company
+}
+
+type DailyLog {
+  activity: Activity
+  company: Company
+  detail: String
+  user: User
+  createdAt: String!
+}
+
+type Coords {
+  startX: Float
+  startY: Float
+  endX: Float
+  endY: Float
+}
+
+type Cost {
+  unitCost: Float
+  totalCost: Float
+  currency: String
+}
+
+type addCompanyResponse {
+  ok: Boolean
+  error: String
+  company: Company
+}
+
+type Mutation {
+  addCompany(name: String!): addCompanyResponse
+  kitty(name: String!): kittyResponse
+  addUser(firstName: String!, lastName: String!): addUserResponse
+}
+
+type Company {
+  _id: ID!
+  code: String
+  name: String
+  personInCharge: User
+  phoneNumber: String
+  typeOfWokr: [String]
+  project: [Project]
+  activity: [Activity]
+  issue: [Issue]
+  dailyLog: [DailyLog]
+  user: [User]
+}
+
+type companyResponse {
+  ok: Boolean
+  error: String
+  company: Company
+}
+
 type Query {
+  company(_id: ID!): companyResponse
   sayBye: String!
   sayHello(name: String!): sayHelloResponse!
   kitty: String
+  user(_id: ID!): userResponse!
 }
 
 type sayHelloResponse {
   text: String!
   error: Boolean!
+}
+
+type Issue {
+  id: Int!
+  title: String!
+  type: String!
+  activity: Activity
+  rating: String
+  user: User
+  company: Company
+  status: String
+  photo: String
+  createdAt: String!
+}
+
+type Item {
+  code: String!
+  name: String!
+  standard: String
+  unit: String
+  currency: String
+  quantity: Float
+  item: [Item]!
+  materialCost: Cost
+  laberCost: Cost
+  expenses: Cost
+  total: Cost
+  others: String
+  activity: [Activity]
 }
 
 type kittyResponse {
@@ -16,6 +126,48 @@ type kittyResponse {
   error: String
 }
 
-type Mutation {
-  kitty(name: String!): kittyResponse
+type Project {
+  id: Int!
+  name: String!
+  adminUser: [User]!
+  activity: [Activity]
+  progressRate: Float
+  company: [Company]
+  user: [User]
+}
+
+type Schedule {
+  name: String!
+}
+
+type Statement {
+  activity: [Activity]!
+}
+
+type addUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type User {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+}
+
+type userResponse {
+  ok: Boolean
+  error: String
+  user: User
+}
+
+type Zone {
+  project: String
+  building: String
+  floor: String
+  detail: String
+  coords: Coords
+  code: String
+  activity: [Activity]
 }

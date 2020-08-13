@@ -1,0 +1,23 @@
+type Company {
+  _id: ID!
+  code: String
+  name: String
+  personInCharge: User
+  phoneNumber: String
+  typeOfWokr: [String]
+  project: [Project]
+  activity: [Activity]
+  issue: [Issue]
+  dailyLog: [DailyLog]
+  user: [User]
+}
+
+type companyResponse {
+  ok: Boolean
+  error: String
+  company: Company
+}
+
+type Query {
+  company(_id: ID!): companyResponse
+}

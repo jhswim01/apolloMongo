@@ -1,0 +1,9 @@
+type addCompanyResponse {
+  ok: Boolean
+  error: String
+  company: Company
+}
+
+type Mutation {
+  addCompany(name: String!): addCompanyResponse
+}

@@ -1,0 +1,11 @@
+type Zone {
+  project: String
+  building: String
+  floor: String
+  detail: String
+  coords: Coords
+  code: String
+  activity: [Activity]
+}
+
+# activity?

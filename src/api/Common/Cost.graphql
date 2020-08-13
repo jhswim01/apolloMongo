@@ -1,0 +1,5 @@
+type Cost {
+  unitCost: Float
+  totalCost: Float
+  currency: String
+}

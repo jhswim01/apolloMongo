@@ -1,0 +1,15 @@
+type Item {
+  code: String!
+  name: String!
+  standard: String
+  unit: String
+  currency: String
+  quantity: Float
+  item: [Item]!
+  materialCost: Cost
+  laberCost: Cost
+  expenses: Cost
+  total: Cost
+  others: String
+  activity: [Activity]
+}

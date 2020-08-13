@@ -1,0 +1,9 @@
+type Project {
+  id: Int!
+  name: String!
+  adminUser: [User]!
+  activity: [Activity]
+  progressRate: Float
+  company: [Company]
+  user: [User]
+}

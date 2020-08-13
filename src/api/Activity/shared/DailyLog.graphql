@@ -1,0 +1,7 @@
+type DailyLog {
+  activity: Activity
+  company: Company
+  detail: String
+  user: User
+  createdAt: String!
+}

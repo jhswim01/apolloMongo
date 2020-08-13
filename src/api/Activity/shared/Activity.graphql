@@ -1,0 +1,25 @@
+type Activity {
+  id: Int!
+  code: String!
+  typeOfWork: String!
+  name: String!
+  plannedCost: Float
+  actualCost: Float
+  progressRate: Float
+  plannedStartDate: String!
+  plannedEndDate: String!
+  actualStartDate: String!
+  actualEndDate: String!
+  plannedDuration: Int
+  actualDuration: Int
+  Completed: Boolean
+  Approved: Boolean
+  detail: String
+  item: [Item]
+  preActivity: [Activity]
+  postActivity: [Activity]
+  zone: Zone
+  issue: [Issue]
+  dailyLog: DailyLog
+  company: Company
+}

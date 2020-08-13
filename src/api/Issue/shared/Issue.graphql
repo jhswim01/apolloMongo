@@ -1,0 +1,12 @@
+type Issue {
+  id: Int!
+  title: String!
+  type: String!
+  activity: Activity
+  rating: String
+  user: User
+  company: Company
+  status: String
+  photo: String
+  createdAt: String!
+}

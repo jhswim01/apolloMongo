@@ -1,0 +1,19 @@
+type User {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+  # adminProject: [Project]
+  # company: Company
+  # issue: [Issue]
+  # dailyLog: [DailyLog]
+}
+
+type userResponse {
+  ok: Boolean
+  error: String
+  user: User
+}
+
+type Query {
+  user(_id: ID!): userResponse!
+}
