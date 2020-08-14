@@ -5,5 +5,5 @@ type addCompanyResponse {
 }
 
 type Mutation {
-  addCompany(name: String!): addCompanyResponse
+  addCompany(name: String!, user: [String]): addCompanyResponse
 }

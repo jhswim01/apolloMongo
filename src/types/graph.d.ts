@@ -1,4 +1,4 @@
-export const typeDefs = ["type Activity {\n  id: Int!\n  code: String!\n  typeOfWork: String!\n  name: String!\n  plannedCost: Float\n  actualCost: Float\n  progressRate: Float\n  plannedStartDate: String!\n  plannedEndDate: String!\n  actualStartDate: String!\n  actualEndDate: String!\n  plannedDuration: Int\n  actualDuration: Int\n  Completed: Boolean\n  Approved: Boolean\n  detail: String\n  item: [Item]\n  preActivity: [Activity]\n  postActivity: [Activity]\n  zone: Zone\n  issue: [Issue]\n  dailyLog: DailyLog\n  company: Company\n}\n\ntype DailyLog {\n  activity: Activity\n  company: Company\n  detail: String\n  user: User\n  createdAt: String!\n}\n\ntype Coords {\n  startX: Float\n  startY: Float\n  endX: Float\n  endY: Float\n}\n\ntype Cost {\n  unitCost: Float\n  totalCost: Float\n  currency: String\n}\n\ntype addCompanyResponse {\n  ok: Boolean\n  error: String\n  company: Company\n}\n\ntype Mutation {\n  addCompany(name: String!): addCompanyResponse\n  kitty(name: String!): kittyResponse\n  addUser(firstName: String!, lastName: String!): addUserResponse\n}\n\ntype Company {\n  _id: ID!\n  code: String\n  name: String\n  personInCharge: User\n  phoneNumber: String\n  typeOfWokr: [String]\n  project: [Project]\n  activity: [Activity]\n  issue: [Issue]\n  dailyLog: [DailyLog]\n  user: [User]\n}\n\ntype companyResponse {\n  ok: Boolean\n  error: String\n  company: Company\n}\n\ntype Query {\n  company(_id: ID!): companyResponse\n  sayBye: String!\n  sayHello(name: String!): sayHelloResponse!\n  kitty: String\n  user(_id: ID!): userResponse!\n}\n\ntype sayHelloResponse {\n  text: String!\n  error: Boolean!\n}\n\ntype Issue {\n  id: Int!\n  title: String!\n  type: String!\n  activity: Activity\n  rating: String\n  user: User\n  company: Company\n  status: String\n  photo: String\n  createdAt: String!\n}\n\ntype Item {\n  code: String!\n  name: String!\n  standard: String\n  unit: String\n  currency: String\n  quantity: Float\n  item: [Item]!\n  materialCost: Cost\n  laberCost: Cost\n  expenses: Cost\n  total: Cost\n  others: String\n  activity: [Activity]\n}\n\ntype kittyResponse {\n  ok: Boolean!\n  kitty: String\n  text: String\n  error: String\n}\n\ntype Project {\n  id: Int!\n  name: String!\n  adminUser: [User]!\n  activity: [Activity]\n  progressRate: Float\n  company: [Company]\n  user: [User]\n}\n\ntype Schedule {\n  name: String!\n}\n\ntype Statement {\n  activity: [Activity]!\n}\n\ntype addUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype User {\n  _id: ID!\n  firstName: String!\n  lastName: String!\n}\n\ntype userResponse {\n  ok: Boolean\n  error: String\n  user: User\n}\n\ntype Zone {\n  project: String\n  building: String\n  floor: String\n  detail: String\n  coords: Coords\n  code: String\n  activity: [Activity]\n}\n"];
+export const typeDefs = ["type Activity {\n  id: Int!\n  code: String!\n  typeOfWork: String!\n  name: String!\n  plannedCost: Float\n  actualCost: Float\n  progressRate: Float\n  plannedStartDate: String!\n  plannedEndDate: String!\n  actualStartDate: String!\n  actualEndDate: String!\n  plannedDuration: Int\n  actualDuration: Int\n  Completed: Boolean\n  Approved: Boolean\n  detail: String\n  item: [Item]\n  preActivity: [Activity]\n  postActivity: [Activity]\n  zone: Zone\n  issue: [Issue]\n  dailyLog: DailyLog\n  company: Company\n}\n\ntype DailyLog {\n  activity: Activity\n  company: Company\n  detail: String\n  user: User\n  createdAt: String!\n}\n\ntype Coords {\n  startX: Float\n  startY: Float\n  endX: Float\n  endY: Float\n}\n\ntype Cost {\n  unitCost: Float\n  totalCost: Float\n  currency: String\n}\n\ntype addCompanyResponse {\n  ok: Boolean\n  error: String\n  company: Company\n}\n\ntype Mutation {\n  addCompany(name: String!, user: [String]): addCompanyResponse\n  kitty(name: String!): kittyResponse\n  addUser(firstName: String!, lastName: String!, company: [String]!): addUserResponse\n}\n\ntype Company {\n  _id: ID!\n  code: String\n  name: String\n  personInCharge: User\n  phoneNumber: String\n  typeOfWokr: [String]\n  project: [Project]\n  activity: [Activity]\n  issue: [Issue]\n  dailyLog: [DailyLog]\n  user: [User]\n}\n\ntype companyResponse {\n  ok: Boolean\n  error: String\n  company: Company\n  user: User\n}\n\ntype Query {\n  company(_id: ID!): companyResponse\n  sayBye: String!\n  sayHello(name: String!): sayHelloResponse!\n  kitty: String\n  User(name: String): String!\n}\n\ntype sayHelloResponse {\n  text: String!\n  error: Boolean!\n}\n\ntype Issue {\n  id: Int!\n  title: String!\n  type: String!\n  activity: Activity\n  rating: String\n  user: User\n  company: Company\n  status: String\n  photo: String\n  createdAt: String!\n}\n\ntype Item {\n  code: String!\n  name: String!\n  standard: String\n  unit: String\n  currency: String\n  quantity: Float\n  item: [Item]!\n  materialCost: Cost\n  laberCost: Cost\n  expenses: Cost\n  total: Cost\n  others: String\n  activity: [Activity]\n}\n\ntype kittyResponse {\n  ok: Boolean!\n  kitty: String\n  text: String\n  error: String\n}\n\ntype Project {\n  id: Int!\n  name: String!\n  adminUser: [User]!\n  activity: [Activity]\n  progressRate: Float\n  company: [Company]\n  user: [User]\n}\n\ntype Schedule {\n  name: String!\n}\n\ntype Statement {\n  activity: [Activity]!\n}\n\ntype addUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype User {\n  _id: ID!\n  firstName: String!\n  lastName: String!\n  # adminProject: [Project]\n  company: [Company]\n}\n\ntype Zone {\n  project: String\n  building: String\n  floor: String\n  detail: String\n  coords: Coords\n  code: String\n  activity: [Activity]\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -6,7 +6,7 @@ export interface Query {
   sayBye: string;
   sayHello: sayHelloResponse;
   kitty: string | null;
-  user: userResponse;
+  User: string;
 }
 
 export interface CompanyQueryArgs {
@@ -18,13 +18,14 @@ export interface SayHelloQueryArgs {
 }
 
 export interface UserQueryArgs {
-  _id: string;
+  name: string | null;
 }
 
 export interface companyResponse {
   ok: boolean | null;
   error: string | null;
   company: Company | null;
+  user: User | null;
 }
 
 export interface Company {
@@ -45,6 +46,7 @@ export interface User {
   _id: string;
   firstName: string;
   lastName: string;
+  company: Array<Company> | null;
 }
 
 export interface Project {
@@ -148,12 +150,6 @@ export interface sayHelloResponse {
   error: boolean;
 }
 
-export interface userResponse {
-  ok: boolean | null;
-  error: string | null;
-  user: User | null;
-}
-
 export interface Mutation {
   addCompany: addCompanyResponse | null;
   kitty: kittyResponse | null;
@@ -162,6 +158,7 @@ export interface Mutation {
 
 export interface AddCompanyMutationArgs {
   name: string;
+  user: Array<string> | null;
 }
 
 export interface KittyMutationArgs {
@@ -171,6 +168,7 @@ export interface KittyMutationArgs {
 export interface AddUserMutationArgs {
   firstName: string;
   lastName: string;
+  company: Array<string>;
 }
 
 export interface addCompanyResponse {

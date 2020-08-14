@@ -1,27 +1,21 @@
 import { Resolvers } from "../../../types/resolvers";
+import Company from "../../../models/Company";
 import User from "../../../models/User";
-import { UserQueryArgs } from "../../../types/graph";
 
 const resolvers: Resolvers = {
+  User: {
+    company: async (user) => {
+      const companies = await Company.find({ user: { $in: user._id } });
+      console.log(companies);
+      return companies;
+    }
+    // company: async (user) => await Company.find({ "user.id": user._id })
+  },
   Query: {
-    user: async (_, args: UserQueryArgs) => {
-      const { _id } = args;
-      try {
-        const user = await User.findById(_id);
-        console.log(user);
-
-        return {
-          ok: true,
-          error: null,
-          user
-        };
-      } catch (error) {
-        return {
-          ok: false,
-          error: error.message,
-          user: null
-        };
-      }
+    getUser: async (_, args) => {
+      const user = await User.findById(args._id);
+      // console.log(user);
+      return user;
     }
   }
 };

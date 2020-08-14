@@ -1,12 +1,11 @@
 import User from "../../../models/User";
-import { AddUserMutationArgs } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
 
 const resolvers: Resolvers = {
   Mutation: {
-    addUser: async (_, args: AddUserMutationArgs) => {
-      const { firstName, lastName } = args;
-      const user = new User({ firstName, lastName });
+    addUser: async (_, args) => {
+      const { firstName, lastName, company } = args;
+      const user = new User({ firstName, lastName, company });
 
       try {
         await user.save();

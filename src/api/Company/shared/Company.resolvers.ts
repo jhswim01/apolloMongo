@@ -1,25 +1,15 @@
 import { Resolvers } from "../../../types/resolvers";
+import User from "../../../models/User";
 import Company from "../../../models/Company";
-import { CompanyQueryArgs } from "../../../types/graph";
 
 const resolvers: Resolvers = {
+  Company: {
+    user: async (company) => await User.find({ _id: { $in: company.user } })
+  },
   Query: {
-    company: async (_, args: CompanyQueryArgs) => {
-      const { _id } = args;
-      try {
-        const company = await Company.findById(_id);
-        return {
-          ok: true,
-          error: null,
-          company
-        };
-      } catch (error) {
-        return {
-          ok: false,
-          error: error.message,
-          company: null
-        };
-      }
+    getCompany: async (_, args) => {
+      const company = await Company.findById(args._id);
+      return company;
     }
   }
 };

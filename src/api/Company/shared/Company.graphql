@@ -16,8 +16,10 @@ type companyResponse {
   ok: Boolean
   error: String
   company: Company
+  user: User
 }
 
 type Query {
   company(_id: ID!): companyResponse
+  getCompany(_id: ID!): Company
 }

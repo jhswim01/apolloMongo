@@ -1,6 +1,5 @@
 import "./dotenv";
 import { ApolloServer } from "apollo-server-express";
-import logger from "morgan";
 import cors from "cors";
 import createDBConnection from "./db";
 import express from "express";
@@ -12,8 +11,8 @@ const db = createDBConnection();
 const apolloServer = new ApolloServer({ schema });
 const app = express();
 
-app.use(logger("dev"));
-apolloServer.applyMiddleware({ app, cors: true });
+// app.use(logger("dev"));
+apolloServer.applyMiddleware({ app, cors: false });
 app.use(cors());
 
 db.once("open", () => {

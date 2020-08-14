@@ -10,7 +10,7 @@ const createDBConnection = (): Connection => {
       useUnifiedTopology: true
     }
   );
-
+  mongoose.set("debug", true);
   return mongoose.connection;
 };
 
